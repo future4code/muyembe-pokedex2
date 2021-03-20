@@ -11,9 +11,7 @@ const Router = () => {
     
 
     const onClickButtonHeader = () => {
-        setIsHome(!isHome)
-
-        
+        setIsHome(!isHome) 
     }
 
     return (
@@ -25,7 +23,6 @@ const Router = () => {
             <Switch>
                 <Route exact path="/">
                     <PokemonsScreen />
-                    {/* <ProductsScreen cart={cart} setCart={setCart}  /> */}
                 </Route>
                 <Route exact path="/pokedex">
                     <PokedexScreen />
