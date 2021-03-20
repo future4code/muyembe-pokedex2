@@ -1,5 +1,7 @@
 import React, { useState } from 'react'
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import Header from '../components/Header/Header';
+import PokemonsScreen from '../screens/PokemonsScreen/PokemonsScreen';
 
 
 const Router = () => {
@@ -7,8 +9,10 @@ const Router = () => {
 
     return (
         <BrowserRouter>
+            <Header />
             <Switch>
                 <Route exact path="/">
+                    <PokemonsScreen />
                     {/* <ProductsScreen cart={cart} setCart={setCart}  /> */}
                 </Route>
                 <Route exact path="/pokedex">
