@@ -1,8 +1,8 @@
-// export const goToCartScreen = (history) => {
-//     history.push("/carrinho");
-//   };
+export const goToPokemonsScreen = (history) => {
+    history.push("/");
+};
   
-// export const goToProductsScreen = (history) => {
-//   history.push("/");
-// };
+export const goToPodexScreen = (history) => {
+  history.push("/pokedex");
+};
   

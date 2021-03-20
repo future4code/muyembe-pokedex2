@@ -1,14 +1,19 @@
 import React, { useState } from 'react'
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import { BrowserRouter, Route, Switch, useHistory } from 'react-router-dom';
 import Header from '../components/Header/Header';
+import PokedexScreen from '../screens/PokedexScreen/PokedexScreen';
 import PokemonsScreen from '../screens/PokemonsScreen/PokemonsScreen';
+import { goToPodexScreen, goToPokemonsScreen } from './coordinator';
 
 
 const Router = () => {
     const [isHome, setIsHome] = useState(true);
+    
 
     const onClickButtonHeader = () => {
         setIsHome(!isHome)
+
+        
     }
 
     return (
@@ -23,7 +28,7 @@ const Router = () => {
                     {/* <ProductsScreen cart={cart} setCart={setCart}  /> */}
                 </Route>
                 <Route exact path="/pokedex">
-                    {/* <CartScreen cart={cart} setCart={setCart} /> */}
+                    <PokedexScreen />
                 </Route>
                 <Route>
                     <div>Página não encontrada</div>

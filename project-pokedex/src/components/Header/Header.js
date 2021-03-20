@@ -1,13 +1,20 @@
 import React from 'react';
+import { useHistory } from 'react-router';
+import { goToPodexScreen, goToPokemonsScreen } from '../../routes/coordinator';
 import { ContainerHeader, ButtonHeader, TitleHeader, ContainerButton, ContainerTitle } from './stylesHeader'
 
 const Header = ({isHome, onClickButton}) => {
+    const history = useHistory();
 
+    const onClickButtonHeader = () => {
+        isHome ? goToPodexScreen(history) : goToPokemonsScreen(history)
+        onClickButton()
+    }
 
-  return (
+    return (
     <ContainerHeader>
         <ContainerButton>
-            <ButtonHeader onClick={onClickButton}>
+            <ButtonHeader onClick={onClickButtonHeader}>
                 { isHome 
                     ? "Ir para Pokédex" 
                     : "Voltar para lista de Pokémons"
@@ -22,9 +29,9 @@ const Header = ({isHome, onClickButton}) => {
                 }
             </TitleHeader>
         </ContainerTitle>
-      
+        
     </ContainerHeader>
-  );
+    );
 }
 
 export default Header;
