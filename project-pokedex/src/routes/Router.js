@@ -5,12 +5,17 @@ import PokemonsScreen from '../screens/PokemonsScreen/PokemonsScreen';
 
 
 const Router = () => {
-    const [pageDisplay, setPageDisplay] = useState("home");
+    const [isHome, setIsHome] = useState(true);
+
+    const onClickButtonHeader = () => {
+        setIsHome(!isHome)
+    }
 
     return (
         <BrowserRouter>
             <Header 
-                pageDisplay={pageDisplay} 
+                isHome={isHome} 
+                onClickButton={onClickButtonHeader}
             />
             <Switch>
                 <Route exact path="/">

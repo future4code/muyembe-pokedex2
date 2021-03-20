@@ -1,24 +1,24 @@
 import React from 'react';
 import { ContainerHeader, ButtonHeader, TitleHeader, ContainerButton, ContainerTitle } from './stylesHeader'
 
-const Header = ({pageDisplay}) => {
+const Header = ({isHome, onClickButton}) => {
 
 
   return (
     <ContainerHeader>
         <ContainerButton>
-            <ButtonHeader>
-                { pageDisplay === "home" 
-                    ? "Ir para Pokedex" 
-                    : "Voltar para lista de Pokemons"
+            <ButtonHeader onClick={onClickButton}>
+                { isHome 
+                    ? "Ir para Pokédex" 
+                    : "Voltar para lista de Pokémons"
                 }
             </ButtonHeader>
         </ContainerButton>
         <ContainerTitle>
             <TitleHeader>
-                { pageDisplay === "home" 
-                    ? "Lista de pokemons" 
-                    : "Pokedex"
+                { isHome 
+                    ? "Lista de Pokémons" 
+                    : "Pokédex"
                 }
             </TitleHeader>
         </ContainerTitle>
