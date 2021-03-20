@@ -1,25 +1,37 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
+import useRequestData from '../../components/hooks/useRequestData';
+import PokemonCard from '../../components/PokemonCard/PokemonCard';
 import { BASE_URL } from '../../constants/urls';
 
 const PokemonsScreen = () => {
-    const [pokemons, setPokemons] = useState([])
-
+    const dataPokemons = useRequestData({}, `${BASE_URL}/pokemon`);
+    const [urlsPokemons, setUrlsPokemons] = useState([])
+    // const [infosPokemon, setInfosPokemons ]= useState([])
+    
     useEffect(() => {
-        axios
-            .get(`${BASE_URL}/pokemon`)
-            .then((response) => {
-                setPokemons(response.data.results)
+        const newArrayUrlsPoke =
+        (dataPokemons.results !== undefined) &&
+             dataPokemons.results.map((pokemon) => {
+                return pokemon.url
             })
-            .catch((error) => {
-            alert("Ocorreu um erro, tente novamente");
-        });
-    },[]);
+        setUrlsPokemons(newArrayUrlsPoke)
+        
+    },[dataPokemons])
+    
+    const componentepokemons = 
+    urlsPokemons &&
+    urlsPokemons.map((urlPoke, index) => {
+        return <PokemonCard 
+            key={index} 
+            urlPokemon={urlPoke} 
+        /> 
+    })
 
-    console.log("pokemons", pokemons)
     return (
     <div>
-        lista pokemons
+        {componentepokemons }
+        teste
     </div>
     );
 }
