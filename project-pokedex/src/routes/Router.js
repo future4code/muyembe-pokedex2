@@ -5,11 +5,13 @@ import PokemonsScreen from '../screens/PokemonsScreen/PokemonsScreen';
 
 
 const Router = () => {
-    // const [cart, setCart] = useState([]);
+    const [pageDisplay, setPageDisplay] = useState("home");
 
     return (
         <BrowserRouter>
-            <Header />
+            <Header 
+                pageDisplay={pageDisplay} 
+            />
             <Switch>
                 <Route exact path="/">
                     <PokemonsScreen />

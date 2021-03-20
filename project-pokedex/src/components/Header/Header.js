@@ -1,12 +1,28 @@
 import React from 'react';
-import { ContainerHeader } from './stylesHeader'
+import { ContainerHeader, ButtonHeader, TitleHeader, ContainerButton, ContainerTitle } from './stylesHeader'
 
-const Header = () => {
+const Header = ({pageDisplay}) => {
 
 
   return (
     <ContainerHeader>
-      header
+        <ContainerButton>
+            <ButtonHeader>
+                { pageDisplay === "home" 
+                    ? "Ir para Pokedex" 
+                    : "Voltar para lista de Pokemons"
+                }
+            </ButtonHeader>
+        </ContainerButton>
+        <ContainerTitle>
+            <TitleHeader>
+                { pageDisplay === "home" 
+                    ? "Lista de pokemons" 
+                    : "Pokedex"
+                }
+            </TitleHeader>
+        </ContainerTitle>
+      
     </ContainerHeader>
   );
 }
