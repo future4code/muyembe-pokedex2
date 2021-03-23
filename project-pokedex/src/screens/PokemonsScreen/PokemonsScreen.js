@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import useRequestData from '../../components/hooks/useRequestData';
 import PokemonCard from '../../components/PokemonCard/PokemonCard';
 import { BASE_URL } from '../../constants/urls';
+import { ContainerPokesScreens } from './stylesPokemonsScreen'
 
 const PokemonsScreen = () => {
     const dataPokemons = useRequestData({}, `${BASE_URL}/pokemon`);
@@ -29,10 +30,9 @@ const PokemonsScreen = () => {
     })
 
     return (
-    <div>
+    <ContainerPokesScreens>
         {componentepokemons }
-        teste
-    </div>
+    </ContainerPokesScreens>
     );
 }
 
