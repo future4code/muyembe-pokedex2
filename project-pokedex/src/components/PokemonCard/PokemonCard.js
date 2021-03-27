@@ -4,21 +4,16 @@ import useRequestData from '../hooks/useRequestData';
 import { ButtonAddPokedex, ButtonDetails, ButtonsContainer, ImagePoke, ImagePokeContainer, PokeCardContainer } from './stylesPokemonCard'
 
 
-const PokemonCard = ({urlPokemon, onClickAddPokedex, insertList}) => {
-    const dataInfoPoke = useRequestData([], urlPokemon);
+const PokemonCard = ({ dataPoke, onClickAddPokedex }) => {
     
-   
-    useEffect(() => {
-        dataInfoPoke && insertList(dataInfoPoke)
-    },[dataInfoPoke])
 
     return (
         <PokeCardContainer>
             <ImagePokeContainer>
-                <ImagePoke alt={"imagem"} src={(dataInfoPoke.sprites && dataInfoPoke.sprites.front_default)  && dataInfoPoke.sprites.front_default }  />
+                <ImagePoke alt={"imagem"} src={(dataPoke.sprites && dataPoke.sprites.front_default)  && dataPoke.sprites.front_default }  />
             </ImagePokeContainer>
             <ButtonsContainer>
-                <ButtonAddPokedex onClick={() => onClickAddPokedex(dataInfoPoke)}>
+                <ButtonAddPokedex onClick={() => onClickAddPokedex(dataPoke)}>
                     Adicionar a Pokedex
                 </ButtonAddPokedex>
                 <ButtonDetails>Ver detalhes</ButtonDetails>

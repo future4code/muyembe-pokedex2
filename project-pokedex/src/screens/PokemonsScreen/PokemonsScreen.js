@@ -9,7 +9,7 @@ const PokemonsScreen = () => {
     const dataPokemons = useRequestData({}, `${BASE_URL}/pokemon`);
     const [urlsPokemons, setUrlsPokemons] = useState([])
     const [pokeList, setPokeList ]= useState([])
-    // const [pokedexList, setPokedexList ]= useState([])
+    const [pokedexList, setPokedexList ]= useState([])
     
     useEffect(() => {
         const newArrayUrlsPoke =
@@ -21,30 +21,44 @@ const PokemonsScreen = () => {
         
     },[dataPokemons])
 
-    // const addToPodex = (dataPokemon) => {
-    //     console.log("dataPokemon", dataPokemon)
-    // }
-    
-    // const createListPokemons = (dataPokemonList) => {
-    //     console.log("dataPokemonList", dataPokemonList)
-    //     const newListPokemons = [...pokeList, dataPokemonList] 
-    //     setPokeList(newListPokemons)
-    // }
-    
-    
+    const getPokeInfos = async (url) => {
+        const res = await fetch(url);
+        const data = await res.json();
+        return data
+    }
+
+    useEffect(() => {
+        let pokeListInfos
+        if(urlsPokemons.length > 0) {
+            pokeListInfos = urlsPokemons.map(async pokeUrl => {
+                const infoPoke = await getPokeInfos(pokeUrl);
+                return infoPoke;
+            });
+
+            (async () => {
+            const resultado = await Promise.all(pokeListInfos);
+            setPokeList(resultado)
+            })();
+        }
+    },[urlsPokemons])
+
+    const addPokeToPokedex = (dataPokemon) => {
+        const newPoke = dataPokemon
+        const newArrayListPokedex = [...pokedexList, newPoke ]
+        setPokedexList(newArrayListPokedex)
+    }
+ 
     const componentepokemons = 
-    urlsPokemons &&
-    urlsPokemons.map((urlPoke, index) => {
+    pokeList &&
+    pokeList.map((pokemon) => {
         return <PokemonCard 
-            key={index} 
-            urlPokemon={urlPoke} 
-            onClickAddPokedex={""}
-            insertList={""}
+            key={pokemon.id} 
+            dataPoke={pokemon} 
+            onClickAddPokedex={addPokeToPokedex}
         /> 
     })
 
-    
-    console.log("pokeList", pokeList)
+
     return (
     <ContainerPokesScreens>
         {componentepokemons }
