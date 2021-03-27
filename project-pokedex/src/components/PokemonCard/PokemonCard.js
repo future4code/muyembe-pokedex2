@@ -4,7 +4,7 @@ import useRequestData from '../hooks/useRequestData';
 import { ButtonAddPokedex, ButtonDetails, ButtonsContainer, ImagePoke, ImagePokeContainer, PokeCardContainer } from './stylesPokemonCard'
 
 
-const PokemonCard = ({ dataPoke, onClickAddPokedex }) => {
+const PokemonCard = ({ page, dataPoke, onClickButtonAction }) => {
     
 
     return (
@@ -13,8 +13,8 @@ const PokemonCard = ({ dataPoke, onClickAddPokedex }) => {
                 <ImagePoke alt={"imagem"} src={(dataPoke.sprites && dataPoke.sprites.front_default)  && dataPoke.sprites.front_default }  />
             </ImagePokeContainer>
             <ButtonsContainer>
-                <ButtonAddPokedex onClick={() => onClickAddPokedex(dataPoke)}>
-                    Adicionar a Pokedex
+                <ButtonAddPokedex onClick={() => onClickButtonAction(dataPoke)}>
+                    {(page === "pokemonsScreen") ? "Adicionar a Pokedex" : "Remover da Pokedex"}
                 </ButtonAddPokedex>
                 <ButtonDetails>Ver detalhes</ButtonDetails>
             </ButtonsContainer>
