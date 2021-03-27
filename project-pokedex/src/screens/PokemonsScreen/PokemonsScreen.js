@@ -14,6 +14,16 @@ const PokemonsScreen = () => {
         const newPoke = dataPokemon
         const newArrayListPokedex = [...states.pokedexList, newPoke ]
         setters.setPokedexList(newArrayListPokedex)
+        removePokeFromPokeList(dataPokemon.id)
+    }
+
+    const removePokeFromPokeList = (idPoke) => {
+        // console.log("idPoke", idPoke)
+        const newPokeList = states.pokeList.filter((pokemon) => {
+           return pokemon.id !== idPoke
+        })
+
+        setters.setPokeList(newPokeList)
     }
  
     const componentepokemons = 
