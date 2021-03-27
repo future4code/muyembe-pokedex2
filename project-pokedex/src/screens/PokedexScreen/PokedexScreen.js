@@ -8,6 +8,18 @@ const PokedexScreen = () => {
   
   const removePokeFromPokedex = (dataPokemon) => {
     console.log("dataPokemon", dataPokemon)
+    const newPokedexList = states.pokedexList.filter((pokemon) => {
+      return pokemon.id !== dataPokemon.id
+    })
+    setters.setPokedexList(newPokedexList)
+
+    addPokeToPokeList(dataPokemon)
+  }
+
+  const addPokeToPokeList = (dataPoke) => {
+    const newPoke = dataPoke
+    const newArrayPokeList = [...states.pokeList, newPoke ]
+    setters.setPokeList(newArrayPokeList)
   }
 
   const componentePokemonsPokedex = 
