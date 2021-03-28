@@ -9,6 +9,7 @@ const GlobalState = (props) => {
     const [pokeList, setPokeList ]= useState([])
     const [pokedexList, setPokedexList ]= useState([])
     const [screenCurrent, setScreenCurrent] = useState("home");
+    const [pokeDetails, setPokeDetails] = useState({})
 
     useEffect(() => {
         const newArrayUrlsPoke =
@@ -41,8 +42,8 @@ const GlobalState = (props) => {
         }
     },[urlsPokemons])
   
-    const states = { pokeList, pokedexList, screenCurrent };
-    const setters = { setPokeList, setPokedexList, setScreenCurrent };
+    const states = { pokeList, pokedexList, screenCurrent, pokeDetails };
+    const setters = { setPokeList, setPokedexList, setScreenCurrent, setPokeDetails };
     
     const data = { states, setters };
 

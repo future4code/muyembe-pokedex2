@@ -49,7 +49,8 @@ const Header = ({screen, onClickButton}) => {
             titleHeaderPage = "Pokédex"
             break;
         case 'details':
-            titleHeaderPage = "Detalhes Pokemon"
+
+            titleHeaderPage = states.pokeDetails.name.charAt(0).toUpperCase()+states.pokeDetails.name.substr(1)
             break;
     }
 
