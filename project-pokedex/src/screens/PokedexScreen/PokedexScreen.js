@@ -1,9 +1,12 @@
 import React, { useContext } from 'react';
+import { useHistory } from 'react-router';
 import PokemonCard from '../../components/PokemonCard/PokemonCard';
 import GlobalStateContext from '../../global/GlobalStateContext';
+import { goToPokemonDetails } from '../../routes/coordinator';
 import { ContainerPokedexScreens } from './stylesPokedexScreen'
 
 const PokedexScreen = () => {
+  const history = useHistory();
   const { states, setters } = useContext(GlobalStateContext)
   
   const removePokeFromPokedex = (dataPokemon) => {
@@ -22,6 +25,11 @@ const PokedexScreen = () => {
     setters.setPokeList(newArrayPokeList)
   }
 
+  const goToDetailsPokemon = (id) => {
+    console.log("id details poke", id)
+    goToPokemonDetails(history, id)
+  }
+
   const componentePokemonsPokedex = 
     states.pokedexList &&
     states.pokedexList.map((pokemon) => {
@@ -30,6 +38,7 @@ const PokedexScreen = () => {
         page={"pokedexScreen"} 
         dataPoke={pokemon} 
         onClickButtonAction={removePokeFromPokedex}
+        onClickButtonDetails={goToDetailsPokemon}
       /> 
   })
 

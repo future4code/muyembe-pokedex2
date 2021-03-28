@@ -1,11 +1,14 @@
 import React, { useContext } from 'react';
+import { useHistory } from 'react-router';
 // import useRequestData from '../../components/hooks/useRequestData';
 import PokemonCard from '../../components/PokemonCard/PokemonCard';
 import GlobalStateContext from '../../global/GlobalStateContext';
+import { goToPokemonDetails } from '../../routes/coordinator';
 // import { BASE_URL } from '../../constants/urls';
 import { ContainerPokesScreens } from './stylesPokemonsScreen'
 
 const PokemonsScreen = () => {
+    const history = useHistory();
     const { states, setters } = useContext(GlobalStateContext)
     console.log("states", states)
     console.log("setters", setters)
@@ -25,6 +28,11 @@ const PokemonsScreen = () => {
 
         setters.setPokeList(newPokeList)
     }
+
+    const goToDetailsPokemon = (id) => {
+        console.log("id details poke", id)
+        goToPokemonDetails(history, id)
+    }
  
     const componentepokemons = 
     states.pokeList &&
@@ -34,6 +42,7 @@ const PokemonsScreen = () => {
             page={"pokemonsScreen"} 
             dataPoke={pokemon} 
             onClickButtonAction={addPokeToPokedex}
+            onClickButtonDetails={goToDetailsPokemon}
         /> 
     })
 

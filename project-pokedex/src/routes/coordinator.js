@@ -5,4 +5,8 @@ export const goToPokemonsScreen = (history) => {
 export const goToPodexScreen = (history) => {
   history.push("/pokedex");
 };
+
+export const goToPokemonDetails = (history, idPoke) => {
+  history.push(`/pokemon/${idPoke}`);
+};
   
