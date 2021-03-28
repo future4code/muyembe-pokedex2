@@ -1,25 +1,22 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import { BrowserRouter, Route, Switch, useHistory } from 'react-router-dom';
 import Header from '../components/Header/Header';
+import GlobalStateContext from '../global/GlobalStateContext';
 import PokedexScreen from '../screens/PokedexScreen/PokedexScreen';
 import PokemonDetails from '../screens/PokemonDetails/PokemonDetails';
 import PokemonsScreen from '../screens/PokemonsScreen/PokemonsScreen';
-import { goToPodexScreen, goToPokemonsScreen } from './coordinator';
+// import { goToPodexScreen, goToPokemonsScreen } from './coordinator';
 
 
 const Router = () => {
-    const [isHome, setIsHome] = useState(true);
+    // const [isHome, setIsHome] = useState(true);
+    const { states, setters } = useContext(GlobalStateContext)
     
-
-    const onClickButtonHeader = () => {
-        setIsHome(!isHome) 
-    }
 
     return (
         <BrowserRouter>
             <Header 
-                isHome={isHome} 
-                onClickButton={onClickButtonHeader}
+                screen={states.screenCurrent} 
             />
             <Switch>
                 <Route exact path="/">

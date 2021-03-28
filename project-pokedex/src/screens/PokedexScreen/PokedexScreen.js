@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { useHistory } from 'react-router';
 import PokemonCard from '../../components/PokemonCard/PokemonCard';
 import GlobalStateContext from '../../global/GlobalStateContext';
@@ -8,6 +8,10 @@ import { ContainerPokedexScreens } from './stylesPokedexScreen'
 const PokedexScreen = () => {
   const history = useHistory();
   const { states, setters } = useContext(GlobalStateContext)
+
+  useEffect(() => {
+    setters.setScreenCurrent("pokedex")
+  },[])
   
   const removePokeFromPokedex = (dataPokemon) => {
     console.log("dataPokemon", dataPokemon)

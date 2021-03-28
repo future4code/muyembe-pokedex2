@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { useHistory } from 'react-router';
 // import useRequestData from '../../components/hooks/useRequestData';
 import PokemonCard from '../../components/PokemonCard/PokemonCard';
@@ -10,8 +10,10 @@ import { ContainerPokesScreens } from './stylesPokemonsScreen'
 const PokemonsScreen = () => {
     const history = useHistory();
     const { states, setters } = useContext(GlobalStateContext)
-    console.log("states", states)
-    console.log("setters", setters)
+
+    useEffect(() => {
+        setters.setScreenCurrent("home")
+    },[])
     
     const addPokeToPokedex = (dataPokemon) => {
         const newPoke = dataPokemon
@@ -30,6 +32,7 @@ const PokemonsScreen = () => {
     }
 
     const goToDetailsPokemon = (id) => {
+        setters.setScreenCurrent("details")
         console.log("id details poke", id)
         goToPokemonDetails(history, id)
     }

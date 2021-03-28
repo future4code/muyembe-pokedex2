@@ -1,8 +1,12 @@
-import React from 'react';
+import React, { useContext, useEffect } from 'react';
+import GlobalStateContext from '../../global/GlobalStateContext';
 
 const PokemonDetails = () => {
+    const { states, setters } = useContext(GlobalStateContext)
     
-
+    useEffect(() => {
+        setters.setScreenCurrent("details")
+    },[])
 
     return (
         <div>
