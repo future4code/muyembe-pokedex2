@@ -8,7 +8,6 @@ import { ContainerContentePower, ContainerImagesPoke, ContainerPokeDetails, Cont
 const PokemonDetails = () => {
     const { states, setters } = useContext(GlobalStateContext)
     const pathParams = useParams()
-    // const [poke, setPoke] = useState({})
     const pokeData = useRequestData({}, `${BASE_URL}/pokemon/${pathParams.id}`);
 
     
@@ -16,36 +15,6 @@ const PokemonDetails = () => {
     useEffect(() => {
         setters.setScreenCurrent("details")
     },[])
-
-    // let listPowers
-    // useEffect(() => {
-    //     if(pokeData !== undefined && pokeData.stats !== undefined) {
-    //         listPowers = 
-    //         (pokeData && pokeData.stats)
-    //         pokeData.stats.map((power, index) => {
-    //             return <div key={index}> 
-    //                 <h3>{power.stat.name}:</h3>
-    //                 <h4>{power.base_stat}</h4>
-    //             </div> 
-    //         })
-    //     }
-       
-    // }, [pokeData]);
-
-    console.log("pokeData", pokeData)
-
-    // let listPowers
-    // if(pokeData !== undefined && pokeData.stats !== undefined) {
-    //     listPowers = 
-    //     (pokeData && pokeData.stats)
-    //     pokeData.stats.map((power, index) => {
-    //         return <div key={index}> 
-    //             <h3>{power.stat.name}:</h3>
-    //             <h4>{power.base_stat}</h4>
-    //         </div> 
-    //     })
-    // }
-    
 
     return (
         <ContainerPokeDetails>
@@ -56,7 +25,6 @@ const PokemonDetails = () => {
            <ContainerInfos>
                 <ContainerPowers>
                     <TitlePower>Poderes :</TitlePower>
-                    {/* { listPowers} */}
                     {(pokeData && pokeData.stats) &&
                             pokeData.stats.map((power, index) => {
                                 return <ContainerContentePower key={index}> 
@@ -80,7 +48,6 @@ const PokemonDetails = () => {
                     <TitleAttacks>Principais ataques :</TitleAttacks>
                     {(pokeData && pokeData.moves) &&
                             pokeData.moves.map((item, index) => {
-                                console.log("item", item)
                                 if(index < 5) {
                                     return <ContainerContenteAttacks key={index}> 
                                         <NameAttack>{item.move.name}</NameAttack>

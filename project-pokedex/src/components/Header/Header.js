@@ -12,19 +12,15 @@ const Header = ({screen, onClickButton}) => {
     const onClickButtonHeader = () => {
         switch(screen) {
             case "home" :
-                // setters.setScreenCurrent("pokedex")
                 goToPodexScreen(history)
                 break;
             case "pokedex":
-                // setters.setScreenCurrent("home")
                 goToPokemonsScreen(history)
                 break;
             case "details":
                 history.goBack();
                 break;
         }
-        // isHome ? goToPodexScreen(history) : goToPokemonsScreen(history)
-        // onClickButton()
     }
 
     const addPokeToPokedex = (dataPokemon) => {
