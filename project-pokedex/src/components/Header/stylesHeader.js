@@ -32,3 +32,17 @@ export const ContainerTitle = styled.div`
 export const TitleHeader = styled.h1`
     color: white;
 `;
+
+export const ContainerButtonAddOrRemove = styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: center;
+`
+
+export const ButtonAddOrRemove = styled.button`
+    width: 150px;
+    height: 70%;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+`;

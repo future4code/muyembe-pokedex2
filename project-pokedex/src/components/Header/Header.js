@@ -1,12 +1,13 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { useHistory } from 'react-router';
 import GlobalStateContext from '../../global/GlobalStateContext';
 import { goToPodexScreen, goToPokemonsScreen } from '../../routes/coordinator';
-import { ContainerHeader, ButtonHeader, TitleHeader, ContainerButton, ContainerTitle } from './stylesHeader'
+import { ContainerHeader, ButtonHeader, TitleHeader, ContainerButton, ContainerTitle, ButtonAddOrRemove, ContainerButtonAddOrRemove } from './stylesHeader'
 
 const Header = ({screen, onClickButton}) => {
     const history = useHistory();
     const { states, setters } = useContext(GlobalStateContext)
+    const {pokeSelectedToDetails, setPokeSelectedToDetails} = useState(states.pokeDetails)
 
     const onClickButtonHeader = () => {
         switch(screen) {
@@ -25,7 +26,46 @@ const Header = ({screen, onClickButton}) => {
         // isHome ? goToPodexScreen(history) : goToPokemonsScreen(history)
         // onClickButton()
     }
+
+    const addPokeToPokedex = (dataPokemon) => {
+        const newPoke = dataPokemon
+        const newArrayListPokedex = [...states.pokedexList, newPoke ]
+        setters.setPokedexList(newArrayListPokedex)
+        removePokeFromPokeList(dataPokemon.id)
+    }
+
+    const addPokeToList = (dataPokemon) => {
+        const newPoke = dataPokemon
+        const newArrayList = [...states.pokeList, newPoke ]
+        setters.setPokeList(newArrayList)
+        removePokeFromPodex(dataPokemon.id)
+    }
+
+    const removePokeFromPokeList = (idPoke) => {
+        const newPokeList = states.pokeList.filter((pokemon) => {
+           return pokemon.id !== idPoke
+        })
+
+        setters.setPokeList(newPokeList)
+    }
+
+    const removePokeFromPodex = (idPoke) => {
+        const newPodexList = states.pokedexList.filter((pokemon) => {
+           return pokemon.id !== idPoke
+        })
+
+        setters.setPokedexList(newPodexList)
+    }
     
+    const addOrRemovePoke = (location) => {
+        if(location === "lista") {
+            addPokeToPokedex(states.pokeDetails)
+            goToPodexScreen(history)
+        } else {
+            addPokeToList(states.pokeDetails)
+            goToPokemonsScreen(history)
+        }
+    }
    
     let titleButtonHeader
     switch(screen) {
@@ -41,6 +81,7 @@ const Header = ({screen, onClickButton}) => {
     }
 
     let titleHeaderPage
+    let buttonAddOrRemove
     switch(screen) {
         case 'home':
             titleHeaderPage = "Lista de Pokémons"
@@ -49,8 +90,37 @@ const Header = ({screen, onClickButton}) => {
             titleHeaderPage = "Pokédex"
             break;
         case 'details':
+            let pokePageLocation
+            if(states.pokeDetails.name !== undefined) {
+                titleHeaderPage = states.pokeDetails.name.charAt(0).toUpperCase()+states.pokeDetails.name.substr(1)
 
-            titleHeaderPage = states.pokeDetails.name.charAt(0).toUpperCase()+states.pokeDetails.name.substr(1)
+                const findPokemonInPokeList =
+                states.pokeList.filter((poke) => {
+                    if(poke.id === states.pokeDetails.id ) {
+                        return true
+                    } else {
+                        return false
+                    }
+                })
+
+                const findPokemonInPokedexList =
+                states.pokedexList.filter((poke) => {
+                    if(poke.id === states.pokeDetails.id ) {
+                        return true
+                    } else {
+                        return false
+                    }
+                })
+
+                if(findPokemonInPokeList.length > 0) {
+                    pokePageLocation = "lista"
+                } else {
+                    pokePageLocation = "pokedex"
+                }
+
+                buttonAddOrRemove = <ButtonAddOrRemove onClick={() => addOrRemovePoke(pokePageLocation)}>{pokePageLocation === "lista" ? "Adiconar a Pokedex" : "Remover da Pokedex"}</ButtonAddOrRemove> 
+            }
+        
             break;
     }
 
@@ -58,23 +128,17 @@ const Header = ({screen, onClickButton}) => {
     <ContainerHeader>
         <ContainerButton>
             <ButtonHeader onClick={onClickButtonHeader}>
-                {/* { isHome 
-                    ? "Ir para Pokédex" 
-                    : "Voltar para lista de Pokémons"
-                } */}
                 {titleButtonHeader}
             </ButtonHeader>
         </ContainerButton>
         <ContainerTitle>
             <TitleHeader>
-                {/* { isHome 
-                    ? "Lista de Pokémons" 
-                    : "Pokédex"
-                } */}
                 {titleHeaderPage}
             </TitleHeader>
         </ContainerTitle>
-        
+        <ContainerButtonAddOrRemove>
+            {buttonAddOrRemove}
+        </ContainerButtonAddOrRemove>
     </ContainerHeader>
     );
 }
